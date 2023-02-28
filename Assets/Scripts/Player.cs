@@ -5,8 +5,8 @@ public class Player : MonoBehaviour
     public float speed = 2.5f;
     public float force;
     public Rigidbody2D rg;
+    public float minimalHeight;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.A))
@@ -22,6 +22,12 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rg.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        }
+
+        if (transform.position.y < minimalHeight)
+        {
+            rg.velocity = new Vector2(0, 0);
+            transform.position = new Vector3(0, 0, 0);
         }
     }
 }
